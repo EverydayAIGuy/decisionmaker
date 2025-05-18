@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>My Decision Maker</title>
+</head>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        #resultdisplay {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        p {
+            color: #808080;
+            margin-bottom: 30px;
+        }
+
+        #decidebtn {
+            background-color: rgb(89, 0, 255);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 120px;
+            margin-bottom: 30px;
+        }
+
+        .coin {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            background: radial-gradient(circle, #f0f0f0 40%, #ccc 100%);
+            border-radius: 50%;
+            line-height: 100px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: none;
+        }
+
+        .flip {
+            animation: flipCoin 2s ease-in-out;
+        }
+
+        @keyframes flipCoin {
+            0% { transform: rotateY(0); }
+            100% { transform: rotateY(720deg); }
+        }
+</style>
+<body>
+    <h1>My Decision Maker</h1>
+    <p>Make a decision just like flipping a coin. If it's 'Heads', do it. If 'Tails', don’t.</p>
+    <button id="decidebtn">Decide for me</button>
+
+    <div class="coin" id="coin">🪙</div>
+    <div id="resultdisplay"></div>
+</body>
+    <script>
+        function decideForMe() {
+            const decideBtn = document.getElementById('decidebtn');
+            const resultDisplay = document.getElementById('resultdisplay');
+            const coin = document.getElementById('coin');
+
+            decideBtn.addEventListener('click', function () {
+                const choices = ['Heads', 'Tails'];
+                const randomIndex = Math.floor(Math.random() * choices.length);
+                const decision = choices[randomIndex];
+
+                // Show placeholder
+                resultDisplay.textContent = "Hang on! Making a decision...";
+                coin.textContent = "🪙";
+                coin.classList.remove('flip'); // Reset animation
+                void coin.offsetWidth; // Force reflow to restart animation
+                coin.classList.add('flip');
+
+                // After 2 seconds, show result
+                setTimeout(() => {
+                    coin.textContent = decision === "Heads" ? "🙂" : "🙃";
+                    resultDisplay.textContent = `${decision}`;
+                }, 2000);
+            });
+        }
+
+        decideForMe();
+    </script>
+</html>
+
+
