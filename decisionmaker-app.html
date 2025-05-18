@@ -81,14 +81,12 @@
                 const randomIndex = Math.floor(Math.random() * choices.length);
                 const decision = choices[randomIndex];
 
-                // Show placeholder
                 resultDisplay.textContent = "Hang on! Making a decision...";
                 coin.textContent = "🪙";
-                coin.classList.remove('flip'); // Reset animation
-                void coin.offsetWidth; // Force reflow to restart animation
+                coin.classList.remove('flip');
+                void coin.offsetWidth;
                 coin.classList.add('flip');
 
-                // After 2 seconds, show result
                 setTimeout(() => {
                     coin.textContent = decision === "Heads" ? "🙂" : "🙃";
                     resultDisplay.textContent = `${decision}`;
